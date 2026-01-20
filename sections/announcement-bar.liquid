@@ -9,21 +9,10 @@
       "default": true
     },
     {
-      "type": "text",
-      "id": "text",
-      "label": "Announcement Text",
-      "default": "Free Shipping on All Orders Over $50!"
-    },
-    {
-      "type": "url",
-      "id": "link",
-      "label": "Link"
-    },
-    {
       "type": "color",
       "id": "bg_color",
       "label": "Background Color",
-      "default": "#000000"
+      "default": "#00a9b0"
     },
     {
       "type": "color",
@@ -32,25 +21,109 @@
       "default": "#ffffff"
     }
   ],
+  "blocks": [
+     {
+        "type": "announcement",
+        "name": "Announcement",
+        "settings": [
+            {
+               "type": "text",
+               "id": "text",
+               "label": "Text",
+               "default": "Free Shipping"
+            },
+            {
+               "type": "url",
+               "id": "link",
+               "label": "Link"
+            },
+            {
+               "type": "text",
+               "id": "icon_name",
+               "label": "Icon Name (optional)",
+               "info": "e.g. 'truck', 'rotate-left'"
+            }
+        ]
+     }
+  ],
   "presets": [
     {
-      "name": "Announcement Bar"
+      "name": "Announcement Bar",
+      "blocks": [
+         { "type": "announcement", "settings": { "text": "Free Shipping" } },
+         { "type": "announcement", "settings": { "text": "90-Day Returns" } },
+         { "type": "announcement", "settings": { "text": "Give $50, Get $50" } }
+      ]
     }
   ]
 }
 {% endschema %}
 
 {% if section.settings.show_announcement %}
-  <div class="relative z-50 text-center py-2 px-4 transition-colors duration-300" 
-       style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <!-- Forced background color style to ensure overrides -->
+  <div class="relative z-50 text-white text-xs md:text-[13px] font-medium tracking-wide" 
+       style="background-color: #00a9b0; color: {{ section.settings.text_color }};">
+    <div class="container mx-auto px-4 md:px-8 h-10 flex items-center justify-between">
+      
+      <!-- Left: Announcements -->
+      <div class="flex items-center gap-6">
+          {% for block in section.blocks %}
+            <div class="flex items-center gap-2">
+                <!-- Icons based on text content approximation if not provided -->
+                {% if block.settings.text contains 'Shipping' %}
+                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 10-4 0 2 2 0 004 0zM21 17a2 2 0 10-4 0 2 2 0 004 0z" />
+                   </svg>
+                {% elsif block.settings.text contains 'Returns' %}
+                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                   </svg>
+                {% endif %}
+                
+                {% if block.settings.link %}
+                <a href="{{ block.settings.link }}" class="hover:underline text-white">
+                   {{ block.settings.text }}
+                </a>
+                {% else %}
+                <span>{{ block.settings.text }}</span>
+                {% endif %}
     
-    {% if section.settings.link %}
-      <a href="{{ section.settings.link }}" class="hover:opacity-80 transition-opacity no-underline text-current text-sm font-medium tracking-wide">
-        {{ section.settings.text }}
-      </a>
-    {% else %}
-      <span class="text-sm font-medium tracking-wide">{{ section.settings.text }}</span>
-    {% endif %}
+                {% unless forloop.last %}
+                   <span class="mx-2 opacity-50">|</span>
+                {% endunless %}
+            </div>
+          {% endfor %}
+      </div>
 
+      <!-- Right: Utility Links -->
+      <div class="hidden md:flex items-center gap-4">
+          <a href="#" class="flex items-center gap-1.5 hover:underline">
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+             </svg>
+             Live chat
+          </a>
+          <span class="opacity-50">|</span>
+          
+          {% if shop.customer_accounts_enabled %}
+            <a href="{{ routes.account_url }}" class="flex items-center gap-1.5 hover:underline">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+                Login
+            </a>
+            <span class="opacity-50">|</span>
+          {% endif %}
+
+          <a href="{{ routes.cart_url }}" class="flex items-center gap-1.5 hover:underline">
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+             </svg>
+             Cart
+          </a>
+      </div>
+
+    </div>
   </div>
 {% endif %}
