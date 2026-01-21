@@ -59,10 +59,34 @@
             "trigger_label": "Shop By Category",
             "menu_submenu": "air-conditioners"
           }
+        },
+        "mega_menu_jkpQpX": {
+          "type": "mega_menu",
+          "settings": {
+            "trigger_label": "Shop By Category",
+            "menu_submenu": "ductless-mini-splits"
+          }
+        },
+        "mega_menu_DXNMBM": {
+          "type": "mega_menu",
+          "settings": {
+            "trigger_label": "Shop By Category",
+            "menu_submenu": "heaters"
+          }
+        },
+        "mega_menu_UBT9Py": {
+          "type": "mega_menu",
+          "settings": {
+            "trigger_label": "Shop By Category",
+            "menu_submenu": "indoor-air-quality"
+          }
         }
       },
       "block_order": [
-        "mega_menu_aUWHQJ"
+        "mega_menu_aUWHQJ",
+        "mega_menu_jkpQpX",
+        "mega_menu_DXNMBM",
+        "mega_menu_UBT9Py"
       ],
       "settings": {
         "logo": "shopify://shop_images/Screenshot_2026-01-20_194544.png",
