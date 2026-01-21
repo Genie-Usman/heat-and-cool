@@ -80,13 +80,37 @@
             "trigger_label": "Shop By Category",
             "menu_submenu": "indoor-air-quality"
           }
+        },
+        "mega_menu_AfmWKb": {
+          "type": "mega_menu",
+          "settings": {
+            "trigger_label": "Shop By Category",
+            "menu_submenu": "accessories"
+          }
+        },
+        "mega_menu_ji9eC4": {
+          "type": "mega_menu",
+          "settings": {
+            "trigger_label": "Shop By Category",
+            "menu_submenu": "hvac-parts"
+          }
+        },
+        "mega_menu_nKyy8M": {
+          "type": "mega_menu",
+          "settings": {
+            "trigger_label": "Shop By Category",
+            "menu_submenu": "sales"
+          }
         }
       },
       "block_order": [
         "mega_menu_aUWHQJ",
         "mega_menu_jkpQpX",
         "mega_menu_DXNMBM",
-        "mega_menu_UBT9Py"
+        "mega_menu_UBT9Py",
+        "mega_menu_AfmWKb",
+        "mega_menu_ji9eC4",
+        "mega_menu_nKyy8M"
       ],
       "settings": {
         "logo": "shopify://shop_images/Screenshot_2026-01-20_194544.png",
