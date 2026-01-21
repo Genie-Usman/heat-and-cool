@@ -1,40 +1,10 @@
 {%- style -%}
   .product-card {
-    padding: 20px 30px 15px;
     border-style: solid;
     border-width: 2px;
     border-image: url({{ 'image_border2.png' | asset_url }}) 2 2 2 1 repeat;
-    background: #fff;
-    margin-top: 50px;
-  }
-  
-  .product-card-images {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    min-height: 80px;
-  }
-  
-  .product-card-image {
-    transform: translateY(-30%);
   }
 
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  .section-header-divider {
-    position: relative;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
   .section-header-divider::before {
     content: '';
     position: absolute;
@@ -59,12 +29,24 @@
     transform: rotate(-16deg);
     box-shadow: 0 0 0 4px #fff;
   }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding bg-white">
-  <div class="container mx-auto px-4 max-w-7xl">
+  <div class="container mx-auto px-4 max-w-site">
     {%- if section.settings.badge_text != blank -%}
-      <div class="section-header-divider">
+      <div class="section-header-divider relative text-center mb-4">
         <span class="section-header-badge">{{ section.settings.badge_text }}</span>
       </div>
     {%- endif -%}
@@ -76,50 +58,52 @@
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {%- for block in section.blocks -%}
-          <div class="product-card" {{ block.shopify_attributes }}>
-            <div class="product-card-images">
-              <div class="w-2/5 product-card-image">
-                {%- if block.settings.image_left != blank -%}
-                  {{ block.settings.image_left | image_url: width: 180 | image_tag: 
-                    loading: 'lazy',
-                    class: 'max-w-full h-auto object-contain'
-                  }}
-                {%- else -%}
-                  {{ 'image' | placeholder_svg_tag: 'w-24 h-28 object-contain' }}
-                {%- endif -%}
+          <div class="pt-20" {{ block.shopify_attributes }}>
+            <div class="product-card bg-white relative">
+              <div class="flex items-end justify-between px-4 h-16">
+                {%- comment -%} Left Image - Badge {%- endcomment -%}
+                <div class="w-2/5 -mt-12 -ml-1">
+                  {%- if block.settings.image_left != blank -%}
+                    {{ block.settings.image_left | image_url: width: 200 | image_tag: 
+                      loading: 'lazy',
+                      class: 'max-w-full h-auto object-contain max-h-36'
+                    }}
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'w-24 h-24 object-contain' }}
+                  {%- endif -%}
+                </div>
+                
+                {%- comment -%} Right Image - Product {%- endcomment -%}
+                <div class="w-3/5 -mt-24 flex justify-end -mr-2">
+                  {%- if block.settings.image_right != blank -%}
+                    {{ block.settings.image_right | image_url: width: 340 | image_tag: 
+                      loading: 'lazy',
+                      class: 'max-w-full h-auto object-contain max-h-40'
+                    }}
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'w-full h-28 object-contain' }}
+                  {%- endif -%}
+                </div>
               </div>
               
-              <div class="w-1/2 product-card-image">
-                {%- if block.settings.image_right != blank -%}
-                  {{ block.settings.image_right | image_url: width: 220 | image_tag: 
-                    loading: 'lazy',
-                    class: 'w-full h-auto object-contain'
-                  }}
-                {%- else -%}
-                  {{ 'image' | placeholder_svg_tag: 'w-full h-28 object-contain' }}
-                {%- endif -%}
-              </div>
+              <a href="{{ block.settings.link | default: '#' }}" class="flex items-center justify-center gap-2 py-4 text-sm font-bold uppercase tracking-widest text-gray-700 hover:text-red-600 transition-colors">
+                {{ block.settings.button_text | default: 'View More' }}
+                <span class="text-current">{% render 'icon-arrow-circle' %}</span>
+              </a>
             </div>
-            
-            <a href="{{ block.settings.link | default: '#' }}" class="flex items-center justify-center gap-2 mt-4 text-xs font-bold uppercase tracking-widest text-gray-700 hover:text-blue-600 transition-colors">
-              {{ block.settings.button_text | default: 'View More' }}
-              <span class="text-current">{% render 'icon-arrow-circle' %}</span>
-            </a>
           </div>
         {%- endfor -%}
       </div>
     {%- endif -%}
 
-    {%- if section.settings.view_all_link != blank -%}
-      <div class="text-center border-t border-gray-200 pt-8">
-        <a href="{{ section.settings.view_all_link }}" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-700 hover:text-blue-600 underline decoration-1 underline-offset-4 transition-colors">
+    <div class="text-center pt-8">
+        <a href="{{ section.settings.view_all_link }}" class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-gray-700 hover:text-red-600 transition-colors">
           {{ section.settings.view_all_text | default: 'View All Products' }}
           <span class="text-current">{% render 'icon-arrow-circle' %}</span>
         </a>
-      </div>
-    {%- endif -%}
+    </div>
   </div>
 </div>
 

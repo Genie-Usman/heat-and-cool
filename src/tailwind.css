@@ -6,6 +6,10 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
+.max-w-site {
+  max-width: 94rem;
+}
+
 header,
 header * {
   font-family: 'Inter', sans-serif;

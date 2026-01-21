@@ -1,0 +1,209 @@
+{%- style -%}
+  .brand-card {
+    border: 1px solid black;
+    background: #fff;
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .brand-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .section-header-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #d1d5db;
+  }
+  
+  .section-header-badge {
+    position: relative;
+    display: inline-block;
+    padding: 2px 12px;
+    background: #fff;
+    border: 1px solid #2d3a4d;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #2d3a4d;
+    transform: rotate(-16deg);
+    box-shadow: 0 0 0 4px #fff;
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  case section.settings.columns_desktop
+    when '3'
+      assign grid_class = 'grid-cols-2 md:grid-cols-3'
+    when '4'
+      assign grid_class = 'grid-cols-2 md:grid-cols-4'
+    when '5'
+      assign grid_class = 'grid-cols-2 md:grid-cols-5'
+    when '6'
+      assign grid_class = 'grid-cols-2 md:grid-cols-3 lg:grid-cols-6'
+    else
+      assign grid_class = 'grid-cols-2 md:grid-cols-5'
+  endcase
+-%}
+
+<div class="section-{{ section.id }}-padding bg-white">
+  <div class="container mx-auto px-4 max-w-site">
+    {%- if section.settings.badge_text != blank -%}
+      <div class="section-header-divider relative text-center mb-4">
+        <span class="section-header-badge">{{ section.settings.badge_text }}</span>
+      </div>
+    {%- endif -%}
+    
+    {%- if section.settings.heading != blank -%}
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 tracking-wider uppercase text-gray-900">
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+  {% comment %} Changed gap-4 to gap-2 (or gap-1 for even tighter spacing) {% endcomment %}
+  <div class="grid {{ grid_class }} gap-4 mb-8"> 
+    {%- for block in section.blocks -%}
+      {% comment %} Changed w-64 to w-full so the gap utility controls the spacing {% endcomment %}
+      <a href="{{ block.settings.collection.url | default: '#' }}" class="brand-card flex items-center justify-center w-64 h-36 px-4" {{ block.shopify_attributes }}>
+        {%- if block.settings.logo != blank -%}
+          {{ block.settings.logo | image_url: width: 2000 | image_tag: 
+            loading: 'lazy',
+            class: 'max-w-full max-h-full object-contain'
+          }}
+        {%- elsif block.settings.collection.image != blank -%}
+          {{ block.settings.collection.image | image_url: width: 2000 | image_tag: 
+            loading: 'lazy',
+            class: 'max-w-full max-h-full object-contain'
+          }}
+        {%- else -%}
+          <span class="text-lg font-bold text-gray-700 uppercase">{{ block.settings.collection.title | default: 'Brand' }}</span>
+        {%- endif -%}
+      </a>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+    <div class="text-center pt-4">
+      <a href="{{ section.settings.view_all_link }}" class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-gray-700 hover:text-red-600 transition-colors">
+        {{ section.settings.view_all_text | default: 'View All Brands' }}
+        <span class="text-current">{% render 'icon-arrow-circle' %}</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Brands",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FEATURED BRANDS"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns per row (desktop)",
+      "options": [
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" },
+        { "value": "6", "label": "6" }
+      ],
+      "default": "5"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all button text",
+      "default": "View All Brands"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Brand logo",
+          "info": "Optional. Overrides collection image."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Brands",
+      "blocks": [
+        { "type": "brand" },
+        { "type": "brand" },
+        { "type": "brand" },
+        { "type": "brand" },
+        { "type": "brand" },
+        { "type": "brand" },
+        { "type": "brand" },
+        { "type": "brand" }
+      ]
+    }
+  ]
+}
+{% endschema %}
