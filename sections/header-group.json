@@ -21,6 +21,18 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "mega_menu_aUWHQJ": {
+          "type": "mega_menu",
+          "settings": {
+            "trigger_label": "Shop By Category",
+            "menu_submenu": "air-conditioners"
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_aUWHQJ"
+      ],
       "settings": {
         "logo": "shopify://shop_images/Screenshot_2026-01-20_194544.png",
         "logo_width": 300,
