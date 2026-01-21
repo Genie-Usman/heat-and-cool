@@ -335,7 +335,7 @@
             "custom_brand": "Goodman",
             "custom_price": "$3,506.00",
             "custom_compare_price": "$4,224.00",
-            "show_rating": false
+            "show_rating": true
           }
         },
         "product_3": {
