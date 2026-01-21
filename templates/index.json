@@ -14,15 +14,30 @@
       "blocks": {
         "image_1": {
           "type": "image_column",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/banner-1.webp",
+            "link": "",
+            "desktop_width": "100",
+            "mobile_width": "100"
+          }
         },
         "image_2": {
           "type": "image_column",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/banner-2.webp",
+            "link": "",
+            "desktop_width": "50",
+            "mobile_width": "100"
+          }
         },
         "image_3": {
           "type": "image_column",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/banner-3.webp",
+            "link": "",
+            "desktop_width": "50",
+            "mobile_width": "100"
+          }
         }
       },
       "block_order": [
@@ -30,7 +45,13 @@
         "image_2",
         "image_3"
       ],
-      "settings": {}
+      "settings": {
+        "full_width": false,
+        "text_content": "<p>WELCOME TO HEATANDCOOL.COM - THE MOST TRUSTED HVAC RETAILER ONLINE</p>",
+        "text_alignment": "text-center",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
