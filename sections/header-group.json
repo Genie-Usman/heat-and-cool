@@ -13,6 +13,37 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "blocks": {
+        "announcement_TGydcM": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free Shipping",
+            "link": "",
+            "icon_name": ""
+          }
+        },
+        "announcement_NyE49Q": {
+          "type": "announcement",
+          "settings": {
+            "text": "90 Day Return",
+            "link": "",
+            "icon_name": "rotate-left"
+          }
+        },
+        "announcement_DyLRab": {
+          "type": "announcement",
+          "settings": {
+            "text": "Give $50, Get $50",
+            "link": "",
+            "icon_name": "a"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_TGydcM",
+        "announcement_NyE49Q",
+        "announcement_DyLRab"
+      ],
       "settings": {
         "show_announcement": true,
         "bg_color": "#00a9b0",
