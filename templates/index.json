@@ -261,12 +261,126 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "trust_testimonials": {
+      "type": "trust-testimonials",
+      "blocks": {
+        "trust_1": {
+          "type": "trust_badge",
+          "settings": {
+            "icon_bg_color": "#14b8a6",
+            "title": "Fast, Free Shipping",
+            "description": "Orders ship free to US continental states. Most orders ship same day."
+          }
+        },
+        "trust_2": {
+          "type": "trust_badge",
+          "settings": {
+            "icon_bg_color": "#14b8a6",
+            "title": "90-Day Returns",
+            "description": "We offer an industry first, hassle-free 90-day return on all purchases."
+          }
+        },
+        "trust_3": {
+          "type": "trust_badge",
+          "settings": {
+            "icon_bg_color": "#14b8a6",
+            "title": "Free Technical Support",
+            "description": "Our experts have been providing HVAC support for over 20 years."
+          }
+        },
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "It has been a great experience purchasing my air conditioning system from Heat & Cool. The customer service representative was very friendly and extremely knowledgeable. I will definitely purchase from Heat & Cool again. I am recommending you to all my friends.",
+            "author": "James M."
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "testimonial_1"
+      ],
+      "settings": {
+        "badge_text": "Trust",
+        "heading": "BUY FROM AMERICA'S #1 HVAC ONLINE RETAILER",
+        "bg_color": "#f5f5f5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "product_recommendations": {
+      "type": "product-recommendations",
+      "blocks": {
+        "product_1": {
+          "type": "product_card",
+          "settings": {
+            "custom_title": "5 Ton 14.0 SEER2 R32 Goodman Central Air Conditioner System - Multi-Positional",
+            "custom_sku": "GXSMT0137",
+            "custom_brand": "Goodman",
+            "custom_price": "$5,324.00",
+            "custom_compare_price": "$6,414.00",
+            "show_rating": true,
+            "rating": 5,
+            "review_count": 1
+          }
+        },
+        "product_2": {
+          "type": "product_card",
+          "settings": {
+            "custom_title": "2 Ton 14.5 SEER2 R32 Goodman Central Air Conditioner System - Multi-Positional",
+            "custom_sku": "GXSMT0127",
+            "custom_brand": "Goodman",
+            "custom_price": "$3,506.00",
+            "custom_compare_price": "$4,224.00",
+            "show_rating": false
+          }
+        },
+        "product_3": {
+          "type": "product_card",
+          "settings": {
+            "custom_title": "2.5 Ton 14.5 SEER2 R32 Goodman Central Air Conditioner System - Multi-Positional",
+            "custom_sku": "GXSMT0129",
+            "custom_brand": "Goodman",
+            "custom_price": "$3,654.00",
+            "custom_compare_price": "$4,402.00",
+            "show_rating": false
+          }
+        },
+        "product_4": {
+          "type": "product_card",
+          "settings": {
+            "custom_title": "2.5 Ton 15.2 SEER2 R32 Goodman Central Air Conditioner System - Multi-Positional",
+            "custom_sku": "GXSMT0130",
+            "custom_brand": "Goodman",
+            "custom_price": "$3,797.00",
+            "custom_compare_price": "$4,575.00",
+            "show_rating": false
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3",
+        "product_4"
+      ],
+      "settings": {
+        "heading": "RECOMMENDATIONS FOR YOU",
+        "heading_color": "#14b8a6",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "image_trio",
     "product_cards_grid_YF7BNh",
     "featured_brands",
-    "learning_center"
+    "learning_center",
+    "trust_testimonials",
+    "product_recommendations"
   ]
 }
