@@ -9,12 +9,31 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
+    "image_trio": {
+      "type": "image-trio",
+      "blocks": {
+        "image_1": {
+          "type": "image_column",
+          "settings": {}
+        },
+        "image_2": {
+          "type": "image_column",
+          "settings": {}
+        },
+        "image_3": {
+          "type": "image_column",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "image_1",
+        "image_2",
+        "image_3"
+      ],
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "image_trio"
   ]
 }

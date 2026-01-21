@@ -1,6 +1,12 @@
 {
+  "scripts": {
+    "tailwind": "npx tailwindcss -i ./src/tailwind.css -o ./assets/critical.css --watch",
+    "theme": "shopify theme dev",
+    "dev": "npx concurrently \"npm run tailwind\" \"npm run theme\""
+  },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
+    "concurrently": "^9.2.1",
     "tailwindcss": "^4.1.18"
   }
 }
