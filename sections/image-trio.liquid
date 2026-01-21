@@ -75,7 +75,7 @@
     {%- endif -%}
 
     {%- if section.settings.text_content != blank -%}
-      <div class="text-center {{ section.settings.text_alignment }}">
+      <div class="max-w-2xl mx-auto {{ section.settings.text_alignment }} text-xl md:text-2xl tracking-widest uppercase font-medium text-gray-800 leading-relaxed">
         {{ section.settings.text_content }}
       </div>
     {%- endif -%}
