@@ -214,11 +214,56 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "learning_center": {
+      "type": "learning-center",
+      "blocks": {
+        "info_card_1": {
+          "type": "info_card",
+          "settings": {
+            "icon_bg_color": "#14b8a6",
+            "title": "Learning Center",
+            "description": "Getting the most out of your heating and cooling appliances has never been easier. From product information, how-to guides, frequently asked questions and maintenance tips, we have a wide array of tools to guide you.",
+            "button_text": "View Now",
+            "button_color": "#c45a2c"
+          }
+        },
+        "info_card_2": {
+          "type": "info_card",
+          "settings": {
+            "icon_bg_color": "#14b8a6",
+            "title": "Quote-By-Photo",
+            "description": "Get Customized AC Replacement Recommendations with Your Photos. Upgrade your air conditioner hassle-free. Share images of your current unit, and we'll provide personalized recommendations for its replacement. Your comfort, our expertise!",
+            "button_text": "View Now",
+            "button_color": "#c45a2c"
+          }
+        },
+        "promo_banner_1": {
+          "type": "promo_banner",
+          "settings": {
+            "banner_image": "",
+            "banner_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "info_card_1",
+        "info_card_2",
+        "promo_banner_1"
+      ],
+      "settings": {
+        "badge_text": "View",
+        "heading": "LEARNING CENTER",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "image_trio",
     "product_cards_grid_YF7BNh",
-    "featured_brands"
+    "featured_brands",
+    "learning_center"
   ]
 }
+
