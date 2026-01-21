@@ -135,71 +135,61 @@
         "brand_1": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "frontpage"
           }
         },
         "brand_2": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "daikin"
           }
         },
         "brand_3": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "amana"
           }
         },
         "brand_4": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "goodman"
           }
         },
         "brand_5": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "lg"
           }
         },
         "brand_6": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "maxwell"
           }
         },
         "brand_7": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "noritz"
           }
         },
         "brand_8": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "nest"
           }
         },
         "brand_9": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "pro-1"
           }
         },
         "brand_10": {
           "type": "brand",
           "settings": {
-            "collection": "",
-            "logo": ""
+            "collection": "diversitech"
           }
         }
       },
