@@ -14,9 +14,149 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
-      }
+        "show_badge": true,
+        "copyright_text": "HeatAndCool.com"
+      },
+      "blocks": {
+        "contact_info": {
+          "type": "contact_info",
+          "settings": {
+            "heading": "Do You Have Questions?",
+            "subheading": "Contact us. We are here to help.",
+            "phone_number": "1-855-697-2401",
+            "email": "support@heatandcool.com",
+            "email_text": "Send us an email",
+            "social_button_text": "Connect With Us"
+          }
+        },
+        "menu_company": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Company",
+            "menu": "footer"
+          }
+        },
+        "menu_resources": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Resources",
+            "menu": "main-menu"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Subscribe to Our Newsletter",
+            "placeholder": "Enter your email ...",
+            "button_text": "Subscribe"
+          }
+        },
+        "social_facebook": {
+          "type": "social_link",
+          "settings": {
+            "icon": "facebook",
+            "label": "Facebook",
+            "bg_color": "#3b5998"
+          }
+        },
+        "social_youtube": {
+          "type": "social_link",
+          "settings": {
+            "icon": "youtube",
+            "label": "YouTube",
+            "bg_color": "#4a4a4a"
+          }
+        },
+        "social_blog": {
+          "type": "social_link",
+          "settings": {
+            "icon": "blog",
+            "label": "Blog",
+            "bg_color": "#4a4a4a"
+          }
+        },
+        "payment_visa": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "visa",
+            "label": "Visa",
+            "enabled": true
+          }
+        },
+        "payment_mastercard": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "mastercard",
+            "label": "Mastercard",
+            "enabled": true
+          }
+        },
+        "payment_amex": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "american_express",
+            "label": "American Express",
+            "enabled": true
+          }
+        },
+        "payment_discover": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "discover",
+            "label": "Discover",
+            "enabled": true
+          }
+        },
+        "payment_amazon": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "amazon",
+            "label": "Amazon",
+            "enabled": true
+          }
+        },
+        "payment_verisign": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "verisign",
+            "label": "VeriSign",
+            "enabled": true
+          }
+        },
+        "payment_heatandcool": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "heatandcool_financing",
+            "label": "Heat & Cool Financing",
+            "enabled": true
+          }
+        },
+        "payment_paypal": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "paypal",
+            "label": "PayPal",
+            "enabled": true
+          }
+        }
+      },
+      "block_order": [
+        "contact_info",
+        "menu_company",
+        "menu_resources",
+        "newsletter",
+        "social_facebook",
+        "social_youtube",
+        "social_blog",
+        "payment_visa",
+        "payment_mastercard",
+        "payment_amex",
+        "payment_discover",
+        "payment_amazon",
+        "payment_verisign",
+        "payment_heatandcool",
+        "payment_paypal"
+      ]
     }
   },
   "order": [
