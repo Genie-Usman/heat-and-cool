@@ -13,12 +13,8 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "settings": {
-        "show_badge": true,
-        "copyright_text": "HeatAndCool.com"
-      },
       "blocks": {
-        "contact_info": {
+        "contact_info_REQ4Ff": {
           "type": "contact_info",
           "settings": {
             "heading": "Do You Have Questions?",
@@ -26,137 +22,148 @@
             "phone_number": "1-855-697-2401",
             "email": "support@heatandcool.com",
             "email_text": "Send us an email",
-            "social_button_text": "Connect With Us"
+            "social_button_text": "Connect With Us",
+            "social_button_url": ""
           }
         },
-        "menu_company": {
-          "type": "menu_column",
-          "settings": {
-            "heading": "Company",
-            "menu": "footer"
-          }
-        },
-        "menu_resources": {
-          "type": "menu_column",
-          "settings": {
-            "heading": "Resources",
-            "menu": "main-menu"
-          }
-        },
-        "newsletter": {
-          "type": "newsletter",
-          "settings": {
-            "heading": "Subscribe to Our Newsletter",
-            "placeholder": "Enter your email ...",
-            "button_text": "Subscribe"
-          }
-        },
-        "social_facebook": {
+        "social_link_kmnTfc": {
           "type": "social_link",
           "settings": {
             "icon": "facebook",
             "label": "Facebook",
+            "url": "https://www.facebook.com/HeatAndCoolCom/timeline/",
             "bg_color": "#3b5998"
           }
         },
-        "social_youtube": {
+        "social_link_QhWmeN": {
           "type": "social_link",
           "settings": {
             "icon": "youtube",
-            "label": "YouTube",
-            "bg_color": "#4a4a4a"
+            "label": "Youtube",
+            "url": "https://www.youtube.com/channel/UCTppb1CuxtXej-1JE4BxoZg",
+            "bg_color": "#3b5998"
           }
         },
-        "social_blog": {
+        "social_link_yQK3wR": {
           "type": "social_link",
           "settings": {
             "icon": "blog",
             "label": "Blog",
-            "bg_color": "#4a4a4a"
+            "url": "",
+            "bg_color": "#3b5998"
           }
         },
-        "payment_visa": {
+        "menu_column_iPMbLV": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Company",
+            "menu": "company"
+          }
+        },
+        "menu_column_LgTqHR": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Company",
+            "menu": "resources"
+          }
+        },
+        "newsletter_mME8td": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Subscribe to Our Newsletter",
+            "placeholder": "Enter your email ...",
+            "button_text": "Subscribe",
+            "form_action": ""
+          }
+        },
+        "payment_icon_KiJf4J": {
           "type": "payment_icon",
           "settings": {
+            "enabled": true,
             "icon": "visa",
-            "label": "Visa",
-            "enabled": true
+            "label": "Visa"
           }
         },
-        "payment_mastercard": {
+        "payment_icon_9LB8JG": {
           "type": "payment_icon",
           "settings": {
+            "enabled": true,
             "icon": "mastercard",
-            "label": "Mastercard",
-            "enabled": true
+            "label": "Mastercard"
           }
         },
-        "payment_amex": {
+        "payment_icon_GQJgXJ": {
           "type": "payment_icon",
           "settings": {
+            "enabled": true,
             "icon": "american_express",
-            "label": "American Express",
-            "enabled": true
+            "label": "American Express"
           }
         },
-        "payment_discover": {
+        "payment_icon_WTrNnN": {
           "type": "payment_icon",
           "settings": {
+            "enabled": true,
             "icon": "discover",
-            "label": "Discover",
-            "enabled": true
+            "label": "Discover"
           }
         },
-        "payment_amazon": {
+        "payment_icon_fYkLda": {
           "type": "payment_icon",
           "settings": {
+            "enabled": true,
             "icon": "amazon",
-            "label": "Amazon",
-            "enabled": true
+            "label": "Amazon"
           }
         },
-        "payment_verisign": {
+        "payment_icon_PWqBf7": {
           "type": "payment_icon",
           "settings": {
+            "enabled": true,
             "icon": "verisign",
-            "label": "VeriSign",
-            "enabled": true
+            "label": "Verisign"
           }
         },
-        "payment_heatandcool": {
+        "payment_icon_ak86jx": {
           "type": "payment_icon",
           "settings": {
+            "enabled": true,
             "icon": "heatandcool_financing",
-            "label": "Heat & Cool Financing",
-            "enabled": true
+            "label": "Heat And Cool Financing"
           }
         },
-        "payment_paypal": {
+        "payment_icon_F64kfE": {
           "type": "payment_icon",
           "settings": {
+            "enabled": true,
             "icon": "paypal",
-            "label": "PayPal",
-            "enabled": true
+            "label": "Paypal"
           }
         }
       },
       "block_order": [
-        "contact_info",
-        "menu_company",
-        "menu_resources",
-        "newsletter",
-        "social_facebook",
-        "social_youtube",
-        "social_blog",
-        "payment_visa",
-        "payment_mastercard",
-        "payment_amex",
-        "payment_discover",
-        "payment_amazon",
-        "payment_verisign",
-        "payment_heatandcool",
-        "payment_paypal"
-      ]
+        "contact_info_REQ4Ff",
+        "social_link_kmnTfc",
+        "social_link_QhWmeN",
+        "social_link_yQK3wR",
+        "menu_column_iPMbLV",
+        "menu_column_LgTqHR",
+        "newsletter_mME8td",
+        "payment_icon_KiJf4J",
+        "payment_icon_9LB8JG",
+        "payment_icon_GQJgXJ",
+        "payment_icon_WTrNnN",
+        "payment_icon_fYkLda",
+        "payment_icon_PWqBf7",
+        "payment_icon_ak86jx",
+        "payment_icon_F64kfE"
+      ],
+      "settings": {
+        "show_badge": true,
+        "badge_link": "",
+        "footer_logo": "shopify://shop_images/logo-mini.avif",
+        "copyright_text": "HeatAndCool.com"
+      }
     }
   },
   "order": [
