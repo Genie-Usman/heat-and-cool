@@ -160,7 +160,7 @@
       ],
       "settings": {
         "show_badge": true,
-        "badge_link": "",
+        "badge_link": "#",
         "footer_logo": "shopify://shop_images/logo-mini.avif",
         "copyright_text": "HeatAndCool.com"
       }
