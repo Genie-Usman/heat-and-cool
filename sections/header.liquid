@@ -48,10 +48,10 @@
           "info": "The exact name of the menu link to attach this mega menu to."
         },
         {
-            "type": "link_list",
-            "id": "menu_submenu",
-            "label": "Side Menu",
-            "info": "The Level 2 menu to display on the left side."
+          "type": "link_list",
+          "id": "menu_submenu",
+          "label": "Side Menu",
+          "info": "The Level 2 menu to display on the left side."
         }
       ]
     }
@@ -64,12 +64,32 @@
 }
 {% endschema %}
 
+<style>
+  .wipe-enter-active {
+    transition: clip-path 0.4s ease-out, -webkit-clip-path 0.4s ease-out;
+  }
+  .wipe-leave-active {
+    transition: clip-path 0.3s ease-in, -webkit-clip-path 0.3s ease-in;
+  }
+  .wipe-enter-start,
+  .wipe-leave-end {
+    clip-path: inset(0 100% 0 0);
+    -webkit-clip-path: inset(0 100% 0 0);
+  }
+  .wipe-enter-end,
+  .wipe-leave-start {
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+</style>
+
 <header 
   class="relative w-full z-40 bg-white shadow-sm"
   x-data="{ 
      openMenu: null,
      activeAccordion: null,
      activePanel: null,
+     panelVisible: false,
      toggleMenu(index) {
         if (this.openMenu === index) {
             this.openMenu = null;
@@ -77,6 +97,7 @@
             this.openMenu = index;
             this.activeAccordion = null; 
             this.activePanel = null;
+            this.panelVisible = false;
         }
      },
      closeMenu() {
@@ -91,15 +112,15 @@
   <div class="container mx-auto px-4 md:px-8 py-4 flex flex-col lg:flex-row items-center justify-between gap-8">
     
     <!-- Logo -->
-    <a href="{{ routes.root_url }}" class="flex-shrink-0 block">
+    <a href="{{ routes.root_url }}" class="shrink-0 block">
       {% if section.settings.logo %}
         {{ section.settings.logo | image_url: width: section.settings.logo_width | image_tag: class: 'object-contain', loading: 'eager', height: 'auto' }}
       {% else %}
         <!-- Text Logo Fallback resembling the image's layout if possible, but mainly relying on text -->
         <div class="flex items-center gap-1">
-           <span class="text-3xl font-bold tracking-widest text-[#1a2e3b]">HEAT</span>
-           <div class="w-8 h-8 rounded-full bg-gradient-to-b from-red-500 to-blue-500 flex items-center justify-center text-white font-serif italic text-lg">&</div>
-           <span class="text-3xl font-bold tracking-widest text-[#1a2e3b]">COOL</span>
+            <span class="text-3xl font-bold tracking-widest text-[#1a2e3b]">HEAT</span>
+            <div class="w-8 h-8 rounded-full bg-gradient-to-b from-red-500 to-blue-500 flex items-center justify-center text-white font-serif italic text-lg">&</div>
+            <span class="text-3xl font-bold tracking-widest text-[#1a2e3b]">COOL</span>
         </div>
       {% endif %}
     </a>
@@ -111,8 +132,7 @@
             type="search" 
             name="q" 
             placeholder="Search" 
-            class="flex-grow px-4 outline-none text-gray-700 placeholder-gray-400 text-sm"
-          >
+            class="grow px-4 outline-none text-gray-700 placeholder-gray-400 text-sm">
           <button type="submit" class="bg-[#d94426] hover:bg-[#c0351a] text-white px-8 h-full flex items-center gap-2 font-bold transition-colors text-sm uppercase tracking-wide">
              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -143,7 +163,7 @@
 
   <!-- Row 2: Navigation -->
   <div class="border-t border-gray-100 border-b border-gray-200 bg-white">
-     <div class="container mx-auto px-4 md:px-8 h-12 flex items-center justify-between">
+     <div class="container mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
         
         <!-- Left Nav -->
         <nav class="hidden lg:flex gap-8 h-full items-center">
@@ -160,71 +180,78 @@
               <div class="h-full flex items-center">
                  <a 
                  href="{{ link.url }}" 
-                 class="flex items-center gap-1 text-[13px] font-bold uppercase tracking-wider hover:text-[#d94426] transition-colors h-full relative"
-                 :class="{ 'text-[#d94426]': openMenu === '{{ link.title | handleize }}', 'text-[#d94426]': {{ forloop.first }} || '{{ link.title }}' contains 'CATEGORY' }"
+                 class="group flex items-center gap-1 text-base font-bold uppercase tracking-wider text-[#d94426] transition-all h-full relative border-b-4 border-transparent hover:border-[#d94426]"
+                 :class="{ '!border-[#d94426]': openMenu === '{{ link.title | handleize }}' }"
                  @click.prevent="toggleMenu('{{ link.title | handleize }}')"
                  >
-                 {{ link.title }}
+                 <span class="whitespace-nowrap">{{ link.title }}</span>
                  {% if has_mega_menu or link.links.size > 0 %}
                     <!-- Chevron Down -->
-                    <svg 
-                       xmlns="http://www.w3.org/2000/svg" 
-                       class="h-3 w-3 transition-transform duration-200 text-[#d94426]" 
+                    <span 
+                       class="block h-3 w-3 shrink-0 transition-transform duration-200 text-[#d94426] [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current"
                        :class="{ 'rotate-180': openMenu === '{{ link.title | handleize }}' }"
-                       fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     >
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7 7" />
-                    </svg>
+                       {% render 'chevron-icon' %}
+                    </span>
                  {% endif %}
                  </a>
 
                  <!-- Mega Menu Dropdown -->
                  {% if has_mega_menu %}
                     <div 
-                       class="absolute left-0 top-full w-full bg-white shadow-xl border-t border-gray-100 transform origin-top z-50 flex justify-center"
+                       class="absolute left-0 top-full -mt-px w-full bg-black/60 shadow-xl transform origin-top z-50 transition-opacity duration-300"
                        x-show="openMenu === '{{ link.title | handleize }}'"
                        x-transition:enter="transition ease-out duration-200"
-                       x-transition:enter-start="opacity-0 -translate-y-2"
-                       x-transition:enter-end="opacity-100 translate-y-0"
-                       style="display: none;"
+                       x-transition:enter-start="opacity-0"
+                       x-transition:enter-end="opacity-100"
+                       @mouseleave="panelVisible = false"
                     >
-                       <div class="container mx-auto flex min-h-[500px]">
-                          <!-- Sidebar -->
-                          <div class="w-1/4 py-6 bg-gray-50 border-r border-gray-100 flex flex-col gap-1 overflow-y-auto max-h-[600px]">
+                       <div class="container mx-auto px-4 md:px-8 flex h-[600px]">
+                          <!-- Sidebar (Fixed 25% width) -->
+                          <div 
+                             class="w-1/4 shrink-0 py-6 bg-white border-r border-gray-200 flex flex-col gap-1 overflow-y-auto z-20 shadow-lg [&::-webkit-scrollbar]:hidden" 
+                             style="scrollbar-width: none; -ms-overflow-style: none;"
+                             @mouseover.self="panelVisible = false; activePanel = null"
+                          >
                              {% for block in section.blocks %}
                                 {% if block.settings.trigger_label == link.title %}
                                    {% assign side_menu = block.settings.menu_submenu %}
                                    
                                    <div class="sidebar-accordion-item">
                                       <button 
-                                         class="w-full text-left px-6 py-3 flex items-center justify-between font-bold text-gray-800 hover:text-[#d94426] hover:bg-gray-100 transition-colors uppercase text-xs tracking-wider border-l-4"
-                                         @click="activeAccordion = (activeAccordion === '{{ block.id }}' ? null : '{{ block.id }}')"
-                                         :class="activeAccordion === '{{ block.id }}' ? 'text-[#d94426] bg-gray-100 border-[#d94426]' : 'border-transparent'"
+                                         class="w-full text-left px-5 py-4 flex items-center justify-between font-semibold text-black hover:text-[#d94426] transition-colors uppercase text-[15px]"
+                                         @click="activeAccordion = (activeAccordion === '{{ block.id }}' ? null : '{{ block.id }}'); activePanel = null; panelVisible = false;"
+                                         @mouseenter="panelVisible = false; activePanel = null"
+                                         :class="activeAccordion === '{{ block.id }}' ? 'text-[#d94426]' : ''"
                                       >
                                          {{ side_menu.title | default: block.settings.trigger_label }}
-                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform duration-200" :class="{ 'rotate-180': activeAccordion === '{{ block.id }}' }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7" />
+                                         <svg 
+                                            class="w-2.5 h-2.5 transition-transform duration-300 transform text-gray-400"
+                                            :class="activeAccordion === '{{ block.id }}' ? 'rotate-90 text-[#d94426]' : ''"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 10"
+                                         >
+                                            <path d="M1.32562,0.04631v0l-1.3258,1.41233v0l3.34797,3.56428v0l-3.34797,3.56496v0l1.3258,1.41131v0l4.67411,-4.97627v0z" fill="currentColor"></path>
                                          </svg>
                                       </button>
                                       
                                       <div x-show="activeAccordion === '{{ block.id }}'" x-collapse>
-                                         <div class="bg-gray-50 pb-2">
+                                         <div class="bg-white pb-2">
                                             {% if side_menu.links.size > 0 %}
                                                {% for child_link in side_menu.links %}
                                                   <div class="relative">
                                                      <a href="{{ child_link.url }}" 
-                                                        class="flex items-center justify-between px-8 py-2 text-gray-600 hover:text-[#d94426] hover:bg-gray-100 transition-all text-sm"
-                                                        @mouseenter="activePanel = '{{ child_link.title | handleize }}-{{ block.id }}'"
+                                                        class="flex items-center justify-between px-5 py-2 text-gray-600 hover:text-[#d94426] transition-all text-[13px]"
+                                                        @mouseenter="activePanel = '{{ child_link.title | handleize }}-{{ block.id }}'; panelVisible = true;"
                                                      >
-                                                        <span class="relative">
+                                                        <span class="relative pl-3">
                                                            {{ child_link.title }}
                                                            <span 
-                                                              class="absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[#d94426] rounded-full transition-opacity"
+                                                              class="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[#d94426] rounded-full transition-opacity"
                                                               :class="activePanel === '{{ child_link.title | handleize }}-{{ block.id }}' ? 'opacity-100' : 'opacity-0'"
                                                            ></span>
                                                         </span>
                                                         {% if child_link.links.size > 0 %}
-                                                           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-opacity" :class="activePanel === '{{ child_link.title | handleize }}-{{ block.id }}' ? 'opacity-100' : 'opacity-0'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-opacity text-gray-400" :class="activePanel === '{{ child_link.title | handleize }}-{{ block.id }}' ? 'opacity-100 text-[#d94426]' : 'opacity-50'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                                            </svg>
                                                         {% endif %}
@@ -239,52 +266,53 @@
                              {% endfor %}
                           </div>
 
-                          <!-- Right Content -->
-                          <div class="w-3/4 p-8 relative bg-white min-h-[500px]">
-                             <div 
-                                class="absolute inset-0 flex items-center justify-center p-8 text-center pointer-events-none transition-opacity duration-300 z-0"
-                                :class="activePanel ? 'opacity-0' : 'opacity-100'"
+                          <!-- Right Panel (Transparent overlay, slides in white content) -->
+                          <div class="w-3/4 relative h-full pointer-events-none">
+                             <!-- Active panel content -->
+                             <div
+                                x-show="panelVisible"
+                                x-transition:enter="wipe-enter-active"
+                                x-transition:enter-start="wipe-enter-start"
+                                x-transition:enter-end="wipe-enter-end"
+                                x-transition:leave="wipe-leave-active"
+                                x-transition:leave-start="wipe-leave-start"
+                                x-transition:leave-end="wipe-leave-end"
+                                class="absolute inset-0 bg-white pointer-events-auto z-20"
+                                style="display: none;"
                              >
-                                <div>
-                                    <h4 class="text-xl font-bold text-gray-800 mb-2">Select a Category</h4>
-                                    <p class="text-gray-500">Click a category on the left to expand options.</p>
-                                </div>
-                             </div>
-
-                             {% for block in section.blocks %}
-                                {% if block.settings.trigger_label == link.title %}
-                                   {% assign side_menu = block.settings.menu_submenu %}
-                                   {% for child_link in side_menu.links %}
-                                      {% if child_link.links.size > 0 %}
-                                         <div 
-                                            class="absolute inset-0 bg-white p-8 transition-all duration-200 z-10 grid grid-cols-4 gap-6 overflow-y-auto"
-                                            x-show="activePanel === '{{ child_link.title | handleize }}-{{ block.id }}'"
-                                            x-transition:enter="transition ease-out duration-200"
-                                            x-transition:enter-start="opacity-0"
-                                            x-transition:enter-end="opacity-100"
-                                            style="display: none;"
-                                         >
-                                            <div class="col-span-4 mb-4 border-b pb-2">
-                                                <h3 class="text-lg font-bold text-[#d94426] uppercase tracking-widest">{{ child_link.title }}</h3>
-                                            </div>
-
-                                            {% for grandchild_link in child_link.links %}
-                                               <a href="{{ grandchild_link.url }}" class="group/card flex flex-col gap-2 p-2 rounded hover:bg-gray-50 transition-colors">
-                                                  <div class="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden relative">
-                                                     <div class="w-full h-full bg-gray-200 group-hover/card:bg-gray-300 transition-colors flex items-center justify-center text-gray-400">
-                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                         </svg>
+                                {% for block in section.blocks %}
+                                   {% if block.settings.trigger_label == link.title %}
+                                      {% assign side_menu = block.settings.menu_submenu %}
+                                      {% for child_link in side_menu.links %}
+                                         {% if child_link.links.size > 0 %}
+                                            <div class="absolute inset-0 bg-white p-8 grid grid-cols-5 gap-6 overflow-y-auto [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none; -ms-overflow-style: none;"
+                                                 x-show="activePanel === '{{ child_link.title | handleize }}-{{ block.id }}'"
+                                                 style="display: none;"
+                                            >
+                                               {% for grandchild_link in child_link.links %}
+                                                  {% assign collection_handle = grandchild_link.url | split: '/collections/' | last | split: '/' | first %}
+                                                  {% assign collection = collections[collection_handle] %}
+                                                  <a href="{{ grandchild_link.url }}" class="group/card flex flex-col gap-2 p-2 rounded hover:bg-gray-50 transition-colors">
+                                                     <div class="aspect-4/3 bg-gray-100 rounded-lg overflow-hidden relative">
+                                                        {% if collection.image %}
+                                                          {{ collection.image | image_url: width: 300 | image_tag: class: 'w-full h-full object-cover', loading: 'lazy' }}
+                                                        {% else %}
+                                                          <div class="w-full h-full bg-gray-200 group-hover/card:bg-gray-300 transition-colors flex items-center justify-center text-gray-400">
+                                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                             </svg>
+                                                          </div>
+                                                        {% endif %}
                                                      </div>
-                                                  </div>
-                                                  <span class="text-sm font-bold text-gray-700 group-hover/card:text-[#d94426] transition-colors text-center">{{ grandchild_link.title }}</span>
-                                               </a>
-                                            {% endfor %}
-                                         </div>
-                                      {% endif %}
-                                   {% endfor %}
-                                {% endif %}
-                             {% endfor %}
+                                                     <span class="text-sm font-semibold text-[#00bcd4] group-hover/card:text-[#d94426] transition-colors text-center">{{ grandchild_link.title }}</span>
+                                                  </a>
+                                               {% endfor %}
+                                            </div>
+                                         {% endif %}
+                                      {% endfor %}
+                                   {% endif %}
+                                {% endfor %}
+                             </div>
                           </div>
                        </div>
                     </div>
@@ -306,17 +334,16 @@
      </div>
   </div>
 
-
   <!-- Mobile Menu Button (Hamburger) - Basic functionality placeholder -->
   <div class="lg:hidden p-4 border-b flex justify-between items-center">
      <span class="font-bold">Menu</span>
      <button class="text-gray-600" aria-label="Menu" onclick="document.querySelector('#mobile-menu-drawer').classList.remove('translate-x-full')">
-       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-       </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
      </button>
   </div>
-  
+
   <div id="mobile-menu-drawer" class="fixed inset-0 z-50 bg-white transform translate-x-full transition-transform duration-300 lg:hidden overflow-y-auto">
      <!-- Mobile Drawer Content -->
   </div>
