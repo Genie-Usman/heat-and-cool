@@ -453,6 +453,9 @@
   .table {
     display: table;
   }
+  .aspect-2\/3 {
+    aspect-ratio: 2/3;
+  }
   .aspect-4\/3 {
     aspect-ratio: 4/3;
   }
@@ -880,6 +883,9 @@
   .border-\[\#313f55\] {
     border-color: #313f55;
   }
+  .border-\[\#C6C9CD\] {
+    border-color: #C6C9CD;
+  }
   .border-\[\#c45a2c\] {
     border-color: #c45a2c;
   }
@@ -903,6 +909,9 @@
   }
   .bg-\[\#3a4a58\] {
     background-color: #3a4a58;
+  }
+  .bg-\[\#F8F8F8\] {
+    background-color: #F8F8F8;
   }
   .bg-\[\#d94426\] {
     background-color: #d94426;
@@ -1335,6 +1344,12 @@
       @media (hover: hover) {
         color: #d94426;
       }
+    }
+  }
+  .last\:border-0 {
+    &:last-child {
+      border-style: var(--tw-border-style);
+      border-width: 0px;
     }
   }
   .hover\:border-\[\#d94426\] {

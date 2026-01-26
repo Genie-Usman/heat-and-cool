@@ -39,7 +39,7 @@
   "blocks": [
     {
       "type": "mega_menu",
-      "name": "Mega Menu",
+      "name": "Mega Menu Section",
       "settings": [
         {
           "type": "text",
@@ -52,6 +52,29 @@
           "id": "menu_submenu",
           "label": "Side Menu",
           "info": "The Level 2 menu to display on the left side."
+        }
+      ]
+    },
+    {
+      "type": "sidebar_link",
+      "name": "Sidebar Bottom Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "trigger_label",
+          "label": "Menu Link Title",
+          "info": "The exact name of the menu link to attach this link to."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Link Text",
+          "default": "Financing Available"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
         }
       ]
     }
@@ -209,59 +232,73 @@
                        <div class="container mx-auto px-4 md:px-8 flex h-[600px]">
                           <!-- Sidebar (Fixed 25% width) -->
                           <div 
-                             class="w-1/4 shrink-0 py-6 bg-white border-r border-gray-200 flex flex-col gap-1 overflow-y-auto z-20 shadow-lg [&::-webkit-scrollbar]:hidden" 
+                             class="w-1/4 shrink-0 py-6 bg-[#F8F8F8] border-r border-[#C6C9CD] flex flex-col gap-1 overflow-y-auto z-20 shadow-lg [&::-webkit-scrollbar]:hidden" 
                              style="scrollbar-width: none; -ms-overflow-style: none;"
                              @mouseover.self="panelVisible = false; activePanel = null"
                           >
                              {% for block in section.blocks %}
                                 {% if block.settings.trigger_label == link.title %}
-                                   {% assign side_menu = block.settings.menu_submenu %}
                                    
-                                   <div class="sidebar-accordion-item">
-                                      <button 
-                                         class="w-full text-left px-5 py-4 flex items-center justify-between font-semibold text-black hover:text-[#d94426] transition-colors uppercase text-[15px]"
-                                         @click="activeAccordion = (activeAccordion === '{{ block.id }}' ? null : '{{ block.id }}'); activePanel = null; panelVisible = false;"
-                                         @mouseenter="panelVisible = false; activePanel = null"
-                                         :class="activeAccordion === '{{ block.id }}' ? 'text-[#d94426]' : ''"
-                                      >
-                                         {{ side_menu.title | default: block.settings.trigger_label }}
-                                         <svg 
-                                            class="w-2.5 h-2.5 transition-transform duration-300 transform text-gray-400"
-                                            :class="activeAccordion === '{{ block.id }}' ? 'rotate-90 text-[#d94426]' : ''"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 10"
+                                   {% if block.type == 'mega_menu' %}
+                                      {% assign side_menu = block.settings.menu_submenu %}
+                                      <div class="sidebar-accordion-item border-b border-gray-100 last:border-0">
+                                         <button 
+                                            class="w-full text-left px-5 py-4 flex items-center justify-between font-semibold text-black hover:text-[#d94426] transition-colors uppercase text-base"
+                                            @click="activeAccordion = (activeAccordion === '{{ block.id }}' ? null : '{{ block.id }}'); activePanel = null; panelVisible = false;"
+                                            @mouseenter="panelVisible = false; activePanel = null"
+                                            :class="activeAccordion === '{{ block.id }}' ? 'text-[#d94426]' : ''"
                                          >
-                                            <path d="M1.32562,0.04631v0l-1.3258,1.41233v0l3.34797,3.56428v0l-3.34797,3.56496v0l1.3258,1.41131v0l4.67411,-4.97627v0z" fill="currentColor"></path>
-                                         </svg>
-                                      </button>
-                                      
-                                      <div x-show="activeAccordion === '{{ block.id }}'" x-collapse>
-                                         <div class="bg-white pb-2">
-                                            {% if side_menu.links.size > 0 %}
-                                               {% for child_link in side_menu.links %}
-                                                  <div class="relative">
-                                                     <a href="{{ child_link.url }}" 
-                                                        class="flex items-center justify-between px-5 py-2 text-gray-600 hover:text-[#d94426] transition-all text-[13px]"
-                                                        @mouseenter="activePanel = '{{ child_link.title | handleize }}-{{ block.id }}'; panelVisible = true;"
-                                                     >
-                                                        <span class="relative pl-3">
-                                                           {{ child_link.title }}
-                                                           <span 
-                                                              class="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[#d94426] rounded-full transition-opacity"
-                                                              :class="activePanel === '{{ child_link.title | handleize }}-{{ block.id }}' ? 'opacity-100' : 'opacity-0'"
-                                                           ></span>
-                                                        </span>
-                                                        {% if child_link.links.size > 0 %}
-                                                           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-opacity text-gray-400" :class="activePanel === '{{ child_link.title | handleize }}-{{ block.id }}' ? 'opacity-100 text-[#d94426]' : 'opacity-50'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                           </svg>
-                                                        {% endif %}
-                                                     </a>
-                                                  </div>
-                                               {% endfor %}
-                                            {% endif %}
+                                            {{ side_menu.title | default: block.settings.trigger_label }}
+                                            <svg 
+                                               class="w-2.5 h-2.5 transition-transform duration-300 transform text-gray-400"
+                                               :class="activeAccordion === '{{ block.id }}' ? 'rotate-90 text-[#d94426]' : ''"
+                                               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 10"
+                                            >
+                                               <path d="M1.32562,0.04631v0l-1.3258,1.41233v0l3.34797,3.56428v0l-3.34797,3.56496v0l1.3258,1.41131v0l4.67411,-4.97627v0z" fill="currentColor"></path>
+                                            </svg>
+                                         </button>
+                                         
+                                         <div x-show="activeAccordion === '{{ block.id }}'" x-collapse>
+                                            <div class="bg-white pb-2">
+                                               {% if side_menu.links.size > 0 %}
+                                                  {% for child_link in side_menu.links %}
+                                                     <div class="relative">
+                                                        <a href="{{ child_link.url }}" 
+                                                           class="flex items-center justify-between px-5 py-2 text-gray-600 hover:text-[#d94426] transition-all text-[13px]"
+                                                           @mouseenter="activePanel = '{{ child_link.title | handleize }}-{{ block.id }}'; panelVisible = true;"
+                                                        >
+                                                           <span class="relative pl-3">
+                                                              {{ child_link.title }}
+                                                              <span 
+                                                                 class="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[#d94426] rounded-full transition-opacity"
+                                                                 :class="activePanel === '{{ child_link.title | handleize }}-{{ block.id }}' ? 'opacity-100' : 'opacity-0'"
+                                                              ></span>
+                                                           </span>
+                                                           {% if child_link.links.size > 0 %}
+                                                              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-opacity text-gray-400" :class="activePanel === '{{ child_link.title | handleize }}-{{ block.id }}' ? 'opacity-100 text-[#d94426]' : 'opacity-50'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                                              </svg>
+                                                           {% endif %}
+                                                        </a>
+                                                     </div>
+                                                  {% endfor %}
+                                               {% endif %}
+                                            </div>
                                          </div>
                                       </div>
-                                   </div>
+                                   
+                                   {% elsif block.type == 'sidebar_link' %}
+                                      <div class="sidebar-link-item border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
+                                         <a 
+                                            href="{{ block.settings.url }}" 
+                                            class="w-full block px-5 py-4 font-bold text-[#d94426] uppercase text-base"
+                                            @mouseenter="panelVisible = false; activePanel = null"
+                                         >
+                                            {{ block.settings.title }}
+                                         </a>
+                                      </div>
+                                   {% endif %}
+
                                 {% endif %}
                              {% endfor %}
                           </div>
@@ -281,7 +318,7 @@
                                 style="display: none;"
                              >
                                 {% for block in section.blocks %}
-                                   {% if block.settings.trigger_label == link.title %}
+                                   {% if block.settings.trigger_label == link.title and block.type == 'mega_menu' %}
                                       {% assign side_menu = block.settings.menu_submenu %}
                                       {% for child_link in side_menu.links %}
                                          {% if child_link.links.size > 0 %}
@@ -292,10 +329,10 @@
                                                {% for grandchild_link in child_link.links %}
                                                   {% assign collection_handle = grandchild_link.url | split: '/collections/' | last | split: '/' | first %}
                                                   {% assign collection = collections[collection_handle] %}
-                                                  <a href="{{ grandchild_link.url }}" class="group/card flex flex-col gap-2 p-2 rounded hover:bg-gray-50 transition-colors">
-                                                     <div class="aspect-4/3 bg-gray-100 rounded-lg overflow-hidden relative">
+                                                  <a href="{{ grandchild_link.url }}" class="group/card flex flex-col gap-2 p-2 rounded transition-colors">
+                                                     <div class="aspect-4/3 rounded-lg overflow-hidden relative">
                                                         {% if collection.image %}
-                                                          {{ collection.image | image_url: width: 300 | image_tag: class: 'w-full h-full object-cover', loading: 'lazy' }}
+                                                          {{ collection.image | image_url: width: 300 | image_tag: class: 'w-full h-full object-contain', loading: 'lazy' }}
                                                         {% else %}
                                                           <div class="w-full h-full bg-gray-200 group-hover/card:bg-gray-300 transition-colors flex items-center justify-center text-gray-400">
                                                              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
